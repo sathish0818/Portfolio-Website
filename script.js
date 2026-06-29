@@ -334,42 +334,33 @@ document.addEventListener('click', e => {
 })();
 
 
-// ── Sticky auto-hide header ────────────────────────────────────
-// The nav is fixed so any link jumps you straight to a section — no scrolling
-// back up. To stay out of the way it hides while reading and reveals on demand:
-//   • At the very top of the page it's always shown.
-//   • Scroll up → reveal.
-//   • Move the cursor up into the header band (the bar + the strip above it) →
-//     peek it open. It STAYS open while the cursor is at or above the bar
-//     (moving up or sideways is fine) and only hides when the cursor moves
-//     DOWN past the bar into the content.
-//   • A scroll-up peek auto-dismisses after 3s of no interaction; a click on a
-//     link always cancels that so it never vanishes mid-action.
+// ── Sticky header — scroll-direction show/hide ─────────────────
+// Hick's Law fix: nav is always reachable. Pattern:
+//   • At the top → always visible, no shadow.
+//   • Scroll DOWN → hide (get out of the way while reading).
+//   • Scroll UP → reveal (user is looking for navigation).
+//   • Touch-friendly — no hover-only interaction required.
 (function stickyHeader() {
   const nav = document.querySelector('.navbar');
   if (!nav) return;
 
-  const TOP_ZONE = 120;   // within this many px of the top → always visible
-
-  let inHeader = false;    // cursor at/above the bar's bottom edge
+  const TOP_ZONE = 120;
+  let lastY = window.pageYOffset;
   let ticking = false;
 
-  const atPageTop = () => window.pageYOffset <= TOP_ZONE;
-  // The header "catch" band = the bar's full height + a little slack below it.
-  const headerBand = () => nav.offsetHeight + 16;
-  function expand() { nav.classList.remove('nav-hidden'); }
-  function collapse() { if (!atPageTop()) nav.classList.add('nav-hidden'); }
-
   function onScroll() {
-    if (atPageTop()) {                 // over the hero — normal, no shadow
-      nav.classList.remove('is-stuck');
-      expand();
+    const y = window.pageYOffset;
+    if (y <= TOP_ZONE) {
+      nav.classList.remove('is-stuck', 'nav-hidden');
     } else {
-      // Once scrolled off the hero the bar stays hidden regardless of scroll
-      // direction — it's only summoned by hovering the top edge.
       nav.classList.add('is-stuck');
-      if (!inHeader) collapse();
+      if (y > lastY) {
+        nav.classList.add('nav-hidden');    // scrolling down → hide
+      } else {
+        nav.classList.remove('nav-hidden'); // scrolling up → reveal
+      }
     }
+    lastY = y;
     ticking = false;
   }
 
@@ -377,20 +368,7 @@ document.addEventListener('click', e => {
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
 
-  // Hide/show is driven purely by vertical position: at/above the bar keeps it
-  // open (up & sideways are safe); moving DOWN past the bar hides it.
-  window.addEventListener('mousemove', (e) => {
-    const within = e.clientY <= headerBand();
-    if (within && !inHeader) {         // entered the header band → reveal
-      inHeader = true;
-      expand();
-    } else if (!within && inHeader) {  // dropped below the bar → hide
-      inHeader = false;
-      collapse();
-    }
-  }, { passive: true });
-
-  onScroll();   // set initial state
+  onScroll();
 })();
 
 // ── Toast notification (design-system style) ──────────────────

@@ -129,7 +129,7 @@ main { display: block; margin: 0; padding: 0; }
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 12px; /* Fitts's Law: was 4px, expanded tap area to ~50px */
 }
 .hamburger span {
   display: block;
@@ -276,6 +276,14 @@ main { display: block; margin: 0; padding: 0; }
 .social-icons img {
   width: clamp(18px, calc(2.14vw + 9.6px), 50px);
   height: clamp(18px, calc(2.14vw + 9.6px), 50px);
+}
+/* Fitts's Law: expand social icon tap areas to 44px without changing icon size */
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -1769,5 +1777,12 @@ main { display: block; margin: 0; padding: 0; }
   border: none;
   cursor: pointer;
   padding: 0;
+  /* Fitts's Law: invisible hit area expansion so tap target is ~44px */
+  position: relative;
+}
+.dot::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
 }
 
