@@ -1478,12 +1478,16 @@ main { display: block; margin: 0; padding: 0; }
    avatar's narrow legs level) and pull the button/follow to the
    edges, so they flank the thin legs with no overlap.
    ══════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  /* Hero is only 380px tall on mobile — the avatar fills nearly all of it.
+     Follow icons at bottom-right land on the avatar body and overlap.
+     Hide them on mobile; social links are accessible in the Contact section. */
+  .hero-follow { display: none; }
+}
+
 @media (max-width: 378px) {
-  /* On ultra-narrow phones the avatar's waist is too wide, so keep the button
-     and follow LOWER (legs level) where the figure is narrow — they stay
-     aligned (same bottom) and clear the legs with tightened side gutters. */
+  /* On ultra-narrow phones keep button low and tight */
   .hero-main { padding-left: 12px; padding-right: 10px; bottom: 26px; }
-  .hero-follow { right: 10px; bottom: 26px; }
   /* Raise button above avatar (z-index 4) and shrink it to fit narrow screen */
   .hero-resume-col { position: relative; z-index: 5; }
   .btn-resume {
