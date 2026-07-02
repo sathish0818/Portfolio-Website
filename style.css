@@ -380,6 +380,7 @@ main { display: block; margin: 0; padding: 0; }
   border-radius: 24px;
   padding: 32px 60px;
   overflow: hidden;
+  touch-action: pan-y; /* let browser scroll vertically; JS handles horizontal swipe */
 }
 .exp-inner {
   display: flex;
@@ -1127,11 +1128,14 @@ main { display: block; margin: 0; padding: 0; }
     scrollbar-width: none;
     scroll-behavior: smooth;
     margin-top: 24px;
+    gap: 16px;
+    padding: 0 4px; /* small side padding so shadows aren't clipped */
+    scroll-padding-inline: 4px;
   }
   .test-carousel::-webkit-scrollbar { display: none; }
   .test-slide {
-    flex: 0 0 100%;
-    scroll-snap-align: center;
+    flex: 0 0 calc(100% - 8px); /* account for side padding so slide fills the view */
+    scroll-snap-align: start;
     background: var(--light-red);
     border-radius: 24px;
     padding: clamp(28px, 4vw, 56px);

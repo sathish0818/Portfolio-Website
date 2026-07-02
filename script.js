@@ -64,7 +64,8 @@ document.addEventListener('click', e => {
     dot.setAttribute('role', 'tab');
     dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
     dot.addEventListener('click', () => {
-      carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
+      // Use offsetLeft so gaps between slides are accounted for
+      carousel.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' });
     });
     dotsWrap.appendChild(dot);
   });
@@ -74,8 +75,13 @@ document.addEventListener('click', e => {
   carousel.addEventListener('scroll', () => {
     if (raf) return;
     raf = requestAnimationFrame(() => {
-      const idx = Math.round(carousel.scrollLeft / carousel.clientWidth);
-      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      // Find the slide whose offsetLeft is closest to current scrollLeft
+      let closest = 0, minDist = Infinity;
+      slides.forEach((s, i) => {
+        const dist = Math.abs(s.offsetLeft - carousel.scrollLeft);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === closest));
       raf = null;
     });
   });
