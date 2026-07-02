@@ -1479,10 +1479,24 @@ main { display: block; margin: 0; padding: 0; }
    edges, so they flank the thin legs with no overlap.
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
-  /* Hero is only 380px tall on mobile — the avatar fills nearly all of it.
-     Follow icons at bottom-right land on the avatar body and overlap.
-     Hide them on mobile; social links are accessible in the Contact section. */
-  .hero-follow { display: none; }
+  /* Avatar spans x=113→291 on a 375px screen — no horizontal room for a
+     wide row. Stack icons vertically at right:12px so the block is only
+     ~22px wide, sitting at x=341 (well clear of the avatar at x=291). */
+  .hero-follow {
+    right: 12px;
+    left: auto;
+    bottom: 40px;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .follow-label { display: none; }
+  .social-icons {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  .social-icons img { width: 22px; height: 22px; }
 }
 
 @media (max-width: 378px) {
