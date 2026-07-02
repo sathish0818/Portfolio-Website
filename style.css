@@ -1479,13 +1479,12 @@ main { display: block; margin: 0; padding: 0; }
    edges, so they flank the thin legs with no overlap.
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
-  /* The Fitts's Law min-width:44px on .social-icons a inflates the row to
-     194px, causing the follow block to overlap the avatar. On mobile the
-     icons are already thumb-sized so reset to natural icon width. This
-     brings the block width down to ~90px matching the Figma mobile design
-     (block at right:20px, x=293–374 on 394px frame). */
+  /* Fitts's Law min-width:44px inflates each icon link to 44px wide,
+     making the row 194px and causing avatar overlap. Reset to natural size.
+     Also raise the block (bottom:90px) so Follow me sits just below the
+     SATHISH S name text — matching the Figma mobile design (8px gap). */
   .social-icons a { min-width: unset; min-height: unset; }
-  .hero-follow { right: 16px; left: auto; bottom: 60px; }
+  .hero-follow { bottom: 90px; }
 }
 
 @media (max-width: 378px) {
