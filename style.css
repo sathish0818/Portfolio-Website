@@ -1479,24 +1479,13 @@ main { display: block; margin: 0; padding: 0; }
    edges, so they flank the thin legs with no overlap.
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
-  /* Avatar spans x=113→291 on a 375px screen — no horizontal room for a
-     wide row. Stack icons vertically at right:12px so the block is only
-     ~22px wide, sitting at x=341 (well clear of the avatar at x=291). */
-  .hero-follow {
-    right: 12px;
-    left: auto;
-    bottom: 40px;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-  .follow-label { display: none; }
-  .social-icons {
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
-  }
-  .social-icons img { width: 22px; height: 22px; }
+  /* The Fitts's Law min-width:44px on .social-icons a inflates the row to
+     194px, causing the follow block to overlap the avatar. On mobile the
+     icons are already thumb-sized so reset to natural icon width. This
+     brings the block width down to ~90px matching the Figma mobile design
+     (block at right:20px, x=293–374 on 394px frame). */
+  .social-icons a { min-width: unset; min-height: unset; }
+  .hero-follow { right: 16px; left: auto; bottom: 60px; }
 }
 
 @media (max-width: 378px) {
