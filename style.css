@@ -1479,12 +1479,11 @@ main { display: block; margin: 0; padding: 0; }
    edges, so they flank the thin legs with no overlap.
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
-  /* Fitts's Law min-width:44px inflates each icon link to 44px wide,
-     making the row 194px and causing avatar overlap. Reset to natural size.
-     Also raise the block (bottom:90px) so Follow me sits just below the
-     SATHISH S name text — matching the Figma mobile design (8px gap). */
+  /* Fitts's Law min-width:44px inflates each icon link to 44px, making the
+     icons row 194px wide and overlapping the avatar. Reset to natural icon
+     size — original clamp positioning stays, aligning Follow me with the
+     Download Resume button at the hero bottom (as designed). */
   .social-icons a { min-width: unset; min-height: unset; }
-  .hero-follow { bottom: 90px; }
 }
 
 @media (max-width: 378px) {
