@@ -1483,11 +1483,16 @@ main { display: block; margin: 0; padding: 0; }
    edges, so they flank the thin legs with no overlap.
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
-  /* Fitts's Law min-width:44px inflates each icon link to 44px, making the
-     icons row 194px wide and overlapping the avatar. Reset to natural icon
-     size — original clamp positioning stays, aligning Follow me with the
-     Download Resume button at the hero bottom (as designed). */
+  /* Fitts's Law min-width:44px inflates the icons row to 194px → avatar
+     overlap. Reset to natural icon size. */
   .social-icons a { min-width: unset; min-height: unset; }
+
+  /* The clamp bottom value (~55px) places Follow me at the avatar's CHEST
+     level on mobile — overlap. Force bottom:26px so both the Download
+     button and Follow me sit at the avatar's LEGS level where the figure
+     is narrow and there is no visual overlap. */
+  .hero-main   { bottom: 26px; }
+  .hero-follow { bottom: 26px; right: 12px; }
 }
 
 @media (max-width: 378px) {
