@@ -6,7 +6,7 @@
 
 /* ───────── Hero ───────── */
 .cs-hero { background: var(--red); color: var(--cream); padding: 150px 0 0; position: relative; overflow: hidden; }
-.cs-hero::before { content: ""; position: absolute; right: -180px; top: -220px; width: 760px; height: 760px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 230, 178, .22), transparent 70%); pointer-events: none; }
+.cs-hero::before { content: ""; position: absolute; right: -140px; top: 150px; width: 720px; height: 720px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 230, 178, .22), transparent 70%); pointer-events: none; }
 .cs-hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); gap: 64px; align-items: center; padding-bottom: 96px; }
 .cs-back { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: var(--tan); text-decoration: none; margin-bottom: 36px; transition: gap .3s ease; }
 .cs-back:hover { gap: 16px; }
