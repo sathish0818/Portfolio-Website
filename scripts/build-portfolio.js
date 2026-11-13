@@ -113,7 +113,7 @@ const chips = ['<button class="pf-chip" type="button" data-filter="all" aria-pre
 const title = 'Portfolio: UX/UI Case Studies & Brand Work | Sathish S';
 const desc = `All work by Sathish Sachithanandam, UX/UI designer in Chennai: ${internal.length} on-site case studies plus UI, branding and graphic design projects, newest first.`;
 const url = `${SITE}/projects`;
-const og = `${SITE}/assets/case-studies/${internal[0] ? internal[0].slug : 'habitly'}/og.jpg`;
+const og = `${SITE}/assets/images/og-projects.jpg?v=2`;
 const ld = [
   { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url, inLanguage: 'en',
     author: { '@type': 'Person', name: 'Sathish Sachithanandam', url: SITE },
@@ -141,11 +141,15 @@ const portfolio = `<!DOCTYPE html>
   <meta property="og:description" content="${attr(desc)}" />
   <meta property="og:url" content="${url}" />
   <meta property="og:image" content="${og}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Projects by Sathish Sachithanandam: Habitly, Zepto, RailOne and Vaulta" />
   <meta property="og:site_name" content="Sathish Sachithanandam, Portfolio" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${attr(title)}" />
   <meta name="twitter:description" content="${attr(desc)}" />
   <meta name="twitter:image" content="${og}" />
+  <meta name="twitter:image:alt" content="Projects by Sathish Sachithanandam: Habitly, Zepto, RailOne and Vaulta" />
   <meta name="twitter:site" content="@im_super18" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/favicon-avatar.png" />

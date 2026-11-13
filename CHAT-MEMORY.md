@@ -152,3 +152,8 @@ For Behance case study: https://www.behance.net/gallery/252079183/From-Figma-To-
 - Steps: add the card image to `assets/images/`, (for an on-site case study also add `projects/<slug>.html`), insert the entry at the TOP of `projects` in `data/projects.json` with `"href": "/projects/<slug>"`, then run `node scripts/build-portfolio.js`, then `node scripts/check-links.js`, then commit and push.
 - The script regenerates: homepage grid + ItemList JSON-LD (between the marker comments in `index.html`), `projects.html`, `sitemap.xml`, and the "Next case study" link in every `projects/*.html`. Do not hand-edit those generated parts.
 - Behance-only projects: set `"external": true` and `href` to the Behance URL.
+
+## Share previews (Open Graph images)
+- Every page has its own unique, project-specific 1200x630 JPG (under 300 KB): `assets/case-studies/<slug>/og.jpg` for each project and `assets/images/og-projects.jpg` for /projects. Homepage uses `assets/images/og-preview.png`.
+- Designed full-bleed (title, key product visuals, stickers), nothing clipped. For a new project, make a new one in the same style, and bump the `?v=` on the og:image URL in the generators so WhatsApp, LinkedIn and X re-fetch it.
+- Test with the LinkedIn Post Inspector, Facebook Sharing Debugger and opengraph.xyz after deploying.
