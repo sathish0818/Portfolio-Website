@@ -1,0 +1,105 @@
+{
+  "_help": "Newest project FIRST. The first 4 show on the homepage, everything shows on portfolio.html. After editing, run: node scripts/build-portfolio.js",
+  "categories": [
+    { "id": "ux", "label": "UX & Product" },
+    { "id": "brand", "label": "Brand & Graphic" }
+  ],
+  "projects": [
+    {
+      "slug": "habitly",
+      "name": "HABITLY",
+      "title": "Habitly: Figma to Production",
+      "type": "FIGMA TO PRODUCTION",
+      "category": "ux",
+      "year": "2026",
+      "href": "case-studies/habitly.html",
+      "external": false,
+      "image": "assets/images/proj-habitly.webp",
+      "alt": "Habitly case study cover: designed in Figma, built with Claude, shown beside a tilted Habitly app window",
+      "theme": "proj-dark",
+      "summary": "A personalized habit tracker designed in Figma and built with Claude: design system, tokens, screens and a Supabase backend.",
+      "ld": "How a habit tracker was designed in Figma and built with Claude: design system, tokens, screens and a Supabase backend"
+    },
+    {
+      "slug": "zepto",
+      "name": "ZEPTO CHECKOUT",
+      "title": "Zepto Checkout UX Audit",
+      "type": "UX AUDIT",
+      "category": "ux",
+      "year": "2026",
+      "href": "case-studies/zepto.html",
+      "external": false,
+      "image": "assets/images/proj-zepto.webp",
+      "alt": "Zepto checkout UX audit cover: 1.4 seconds to place an order, zero taps",
+      "theme": "proj-dark",
+      "summary": "A checkout button that places the order before you tap, and a small fix that hands control back to the user.",
+      "ld": "A UX audit of a checkout button that places the order without a tap, and a small fix"
+    },
+    {
+      "slug": "railone",
+      "name": "RAILONE E-TICKET",
+      "title": "RailOne E-Ticket UX Audit",
+      "type": "UX AUDIT",
+      "category": "ux",
+      "year": "2026",
+      "href": "case-studies/railone.html",
+      "external": false,
+      "image": "assets/images/proj-railone.webp",
+      "alt": "RailOne e-ticket UX audit cover: one ticket, one phone, with a ticket stamped not valid on this device",
+      "theme": "proj-dark-gray",
+      "summary": "A ticket locked to one phone, and a proposed flow that lets a booker send it to the person who is actually travelling.",
+      "ld": "A UX audit of RailOne's e-ticket, which is locked to the booker's phone, and a proposal to let bookers send tickets to passengers"
+    },
+    {
+      "slug": "vaulta",
+      "name": "VAULTA BRAND IDENTITY",
+      "title": "Vaulta Brand Identity",
+      "type": "BRANDING",
+      "category": "brand",
+      "year": "2025",
+      "href": "case-studies/vaulta.html",
+      "external": false,
+      "image": "assets/images/proj-vaulta.webp",
+      "alt": "Vaulta Architecture brand identity cover: the logo surrounded by business card, ID, letterhead, notebook, polo, cap and backpack",
+      "theme": "proj-dark",
+      "summary": "A logo, guidelines and stationery system for an architecture firm, built around one idea: a name that reads like a skyline.",
+      "ld": "Brand identity for an architecture firm: logo concept, lockups, safe zone, palette, typography and stationery applications"
+    },
+    {
+      "slug": "voz",
+      "name": "THE VOZ VOICE APP",
+      "type": "UI DESIGN",
+      "category": "ux",
+      "href": "https://www.behance.net/gallery/144832357/The-Voz-Voice-Sharing-App",
+      "external": true,
+      "image": "assets/images/proj-ui-portfolio.jpg",
+      "alt": "The Voz voice sharing app, UI design screens",
+      "theme": "proj-dark-gray",
+      "summary": "UI design for a voice sharing app. Full project on Behance."
+    },
+    {
+      "slug": "student-workflow",
+      "name": "STUDENT WORKFLOW",
+      "type": "UX CASE STUDY",
+      "category": "ux",
+      "href": "https://www.behance.net/gallery/137708693/Student-Work-Flow-Management",
+      "external": true,
+      "image": "assets/images/proj-student-workflow.jpg",
+      "alt": "Student workflow management app, dashboard UI screens",
+      "theme": "proj-dark",
+      "summary": "A student workflow management app: dashboard UI screens and flows. Full project on Behance."
+    },
+    {
+      "slug": "vector-art",
+      "name": "VECTOR ART",
+      "type": "GRAPHIC DESIGN",
+      "category": "brand",
+      "href": "https://www.behance.net/gallery/128060379/Pencil-Sketch-To-Digital-Art",
+      "external": true,
+      "image": "assets/images/proj-vector-art.jpg",
+      "alt": "Pencil sketch to digital vector art illustration",
+      "theme": "proj-warm",
+      "summary": "From pencil sketch to digital vector art illustration. Full project on Behance."
+    }
+  ]
+}

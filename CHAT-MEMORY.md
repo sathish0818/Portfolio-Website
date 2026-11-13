@@ -138,3 +138,12 @@ For Behance case study: https://www.behance.net/gallery/252079183/From-Figma-To-
 2. Clone GitHub repo: `git clone https://github.com/sathish0818/Portfolio-Website.git`
 3. Open Claude Code in the portfolio folder
 4. Claude will remember everything from the `.claude` folder memory
+
+---
+
+## Adding a new project (portfolio.html + homepage are generated)
+- Single source of truth: `data/projects.json`, **newest project first**.
+- Homepage shows the first 4 (layout slots are fixed: large, small offset, small, large). Everything shows on `portfolio.html`. Older projects drop off the homepage automatically.
+- Steps: add the card image to `assets/images/`, (for an on-site case study also add `case-studies/<slug>.html`), insert the entry at the TOP of `projects` in `data/projects.json`, then run `node scripts/build-portfolio.js`, then commit and push.
+- The script regenerates: homepage grid + ItemList JSON-LD (between the marker comments in `index.html`), `portfolio.html`, `sitemap.xml`, and the "Next case study" / back links in every `case-studies/*.html`. Do not hand-edit those generated parts.
+- Behance-only projects: set `"external": true` and `href` to the Behance URL.
