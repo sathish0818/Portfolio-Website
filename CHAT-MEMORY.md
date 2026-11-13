@@ -141,9 +141,14 @@ For Behance case study: https://www.behance.net/gallery/252079183/From-Figma-To-
 
 ---
 
-## Adding a new project (portfolio.html + homepage are generated)
+## URLs (clean, no .html, no index.html)
+- Public URLs: `/` , `/projects` (all work), `/projects/<slug>` (each case study). Files: `projects.html`, `projects/<slug>.html`. `vercel.json` has `cleanUrls: true` plus 308 redirects from the old `/portfolio` and `/case-studies/*` URLs.
+- Always link with root-absolute clean paths (`/projects`, `/#contact`, `/assets/...`). Never `index.html`, `.html` or `../`.
+- Check all flows after any change: `node scripts/check-links.js [baseUrl]` (default http://localhost:5190; works on the live site too).
+
+## Adding a new project (/projects + homepage are generated)
 - Single source of truth: `data/projects.json`, **newest project first**.
-- Homepage shows the first 4 (layout slots are fixed: large, small offset, small, large). Everything shows on `portfolio.html`. Older projects drop off the homepage automatically.
-- Steps: add the card image to `assets/images/`, (for an on-site case study also add `case-studies/<slug>.html`), insert the entry at the TOP of `projects` in `data/projects.json`, then run `node scripts/build-portfolio.js`, then commit and push.
-- The script regenerates: homepage grid + ItemList JSON-LD (between the marker comments in `index.html`), `portfolio.html`, `sitemap.xml`, and the "Next case study" / back links in every `case-studies/*.html`. Do not hand-edit those generated parts.
+- Homepage shows the first 4 (layout slots are fixed: large, small offset, small, large). Everything shows on `/projects`. Older projects drop off the homepage automatically.
+- Steps: add the card image to `assets/images/`, (for an on-site case study also add `projects/<slug>.html`), insert the entry at the TOP of `projects` in `data/projects.json` with `"href": "/projects/<slug>"`, then run `node scripts/build-portfolio.js`, then `node scripts/check-links.js`, then commit and push.
+- The script regenerates: homepage grid + ItemList JSON-LD (between the marker comments in `index.html`), `projects.html`, `sitemap.xml`, and the "Next case study" link in every `projects/*.html`. Do not hand-edit those generated parts.
 - Behance-only projects: set `"external": true` and `href` to the Behance URL.

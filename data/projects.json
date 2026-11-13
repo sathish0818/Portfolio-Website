@@ -1,8 +1,14 @@
 {
   "_help": "Newest project FIRST. The first 4 show on the homepage, everything shows on portfolio.html. After editing, run: node scripts/build-portfolio.js",
   "categories": [
-    { "id": "ux", "label": "UX & Product" },
-    { "id": "brand", "label": "Brand & Graphic" }
+    {
+      "id": "ux",
+      "label": "UX & Product"
+    },
+    {
+      "id": "brand",
+      "label": "Brand & Graphic"
+    }
   ],
   "projects": [
     {
@@ -12,9 +18,9 @@
       "type": "FIGMA TO PRODUCTION",
       "category": "ux",
       "year": "2026",
-      "href": "case-studies/habitly.html",
+      "href": "/projects/habitly",
       "external": false,
-      "image": "assets/images/proj-habitly.webp",
+      "image": "/assets/images/proj-habitly.webp",
       "alt": "Habitly case study cover: designed in Figma, built with Claude, shown beside a tilted Habitly app window",
       "theme": "proj-dark",
       "summary": "A personalized habit tracker designed in Figma and built with Claude: design system, tokens, screens and a Supabase backend.",
@@ -27,9 +33,9 @@
       "type": "UX AUDIT",
       "category": "ux",
       "year": "2026",
-      "href": "case-studies/zepto.html",
+      "href": "/projects/zepto",
       "external": false,
-      "image": "assets/images/proj-zepto.webp",
+      "image": "/assets/images/proj-zepto.webp",
       "alt": "Zepto checkout UX audit cover: 1.4 seconds to place an order, zero taps",
       "theme": "proj-dark",
       "summary": "A checkout button that places the order before you tap, and a small fix that hands control back to the user.",
@@ -42,9 +48,9 @@
       "type": "UX AUDIT",
       "category": "ux",
       "year": "2026",
-      "href": "case-studies/railone.html",
+      "href": "/projects/railone",
       "external": false,
-      "image": "assets/images/proj-railone.webp",
+      "image": "/assets/images/proj-railone.webp",
       "alt": "RailOne e-ticket UX audit cover: one ticket, one phone, with a ticket stamped not valid on this device",
       "theme": "proj-dark-gray",
       "summary": "A ticket locked to one phone, and a proposed flow that lets a booker send it to the person who is actually travelling.",
@@ -57,9 +63,9 @@
       "type": "BRANDING",
       "category": "brand",
       "year": "2025",
-      "href": "case-studies/vaulta.html",
+      "href": "/projects/vaulta",
       "external": false,
-      "image": "assets/images/proj-vaulta.webp",
+      "image": "/assets/images/proj-vaulta.webp",
       "alt": "Vaulta Architecture brand identity cover: the logo surrounded by business card, ID, letterhead, notebook, polo, cap and backpack",
       "theme": "proj-dark",
       "summary": "A logo, guidelines and stationery system for an architecture firm, built around one idea: a name that reads like a skyline.",
@@ -72,7 +78,7 @@
       "category": "ux",
       "href": "https://www.behance.net/gallery/144832357/The-Voz-Voice-Sharing-App",
       "external": true,
-      "image": "assets/images/proj-ui-portfolio.jpg",
+      "image": "/assets/images/proj-ui-portfolio.jpg",
       "alt": "The Voz voice sharing app, UI design screens",
       "theme": "proj-dark-gray",
       "summary": "UI design for a voice sharing app. Full project on Behance."
@@ -84,7 +90,7 @@
       "category": "ux",
       "href": "https://www.behance.net/gallery/137708693/Student-Work-Flow-Management",
       "external": true,
-      "image": "assets/images/proj-student-workflow.jpg",
+      "image": "/assets/images/proj-student-workflow.jpg",
       "alt": "Student workflow management app, dashboard UI screens",
       "theme": "proj-dark",
       "summary": "A student workflow management app: dashboard UI screens and flows. Full project on Behance."
@@ -96,7 +102,7 @@
       "category": "brand",
       "href": "https://www.behance.net/gallery/128060379/Pencil-Sketch-To-Digital-Art",
       "external": true,
-      "image": "assets/images/proj-vector-art.jpg",
+      "image": "/assets/images/proj-vector-art.jpg",
       "alt": "Pencil sketch to digital vector art illustration",
       "theme": "proj-warm",
       "summary": "From pencil sketch to digital vector art illustration. Full project on Behance."

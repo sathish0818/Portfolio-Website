@@ -1,0 +1,11 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/portfolio", "destination": "/projects", "permanent": true },
+    { "source": "/portfolio.html", "destination": "/projects", "permanent": true },
+    { "source": "/case-studies", "destination": "/projects", "permanent": true },
+    { "source": "/case-studies/:slug.html", "destination": "/projects/:slug", "permanent": true },
+    { "source": "/case-studies/:slug", "destination": "/projects/:slug", "permanent": true }
+  ]
+}

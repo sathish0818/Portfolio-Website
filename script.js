@@ -461,7 +461,8 @@ function showToast(type, message) {
       if (!entry.isIntersecting) return;
       const id = entry.target.id;
       links.forEach(a => {
-        a.classList.toggle('nav-active', a.getAttribute('href') === '#' + id);
+        const h = a.getAttribute('href');
+        a.classList.toggle('nav-active', h === '#' + id || (id === 'projects' && h === '/projects'));
       });
     });
   }, { threshold: 0.3 });

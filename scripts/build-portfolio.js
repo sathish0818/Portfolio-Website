@@ -2,9 +2,9 @@
 /*
  * Builds everything that depends on the project list, from data/projects.json:
  *   - index.html            homepage grid (newest 4) + ItemList JSON-LD (between the marker comments)
- *   - portfolio.html        the full portfolio page (all projects, newest first)
+ *   - projects.html         the full projects page, served at /projects (all projects, newest first)
  *   - sitemap.xml           homepage, portfolio and every on-site case study
- *   - case-studies/*.html   the "Next case study" link, so the loop always includes new case studies
+ *   - projects/*.html       the "Next case study" link (served at /projects/<slug>), so the loop always includes new case studies
  *
  * Usage:  node scripts/build-portfolio.js
  * No dependencies. Safe to run any number of times.
@@ -25,6 +25,8 @@ const data = JSON.parse(read('data/projects.json'));
 const projects = data.projects;
 const cats = data.categories;
 const internal = projects.filter((p) => !p.external);
+// Clean URL /projects/habitly is served from projects/habitly.html (Vercel cleanUrls).
+function pageFile(p) { return p.href.replace(/^\//, '') + '.html'; }
 
 // Guard: a typo here would silently ship a broken card.
 for (const p of projects) {
@@ -32,8 +34,8 @@ for (const p of projects) {
     if (!p[k]) throw new Error(`Project "${p.slug || '?'}" is missing "${k}"`);
   }
   if (!cats.some((c) => c.id === p.category)) throw new Error(`Project "${p.slug}" has unknown category "${p.category}"`);
-  if (!fs.existsSync(path.join(ROOT, p.image))) throw new Error(`Image not found: ${p.image}`);
-  if (!p.external && !fs.existsSync(path.join(ROOT, p.href))) throw new Error(`Page not found: ${p.href}`);
+  if (!fs.existsSync(path.join(ROOT, p.image.replace(/^\//, '')))) throw new Error(`Image not found: ${p.image}`);
+  if (!p.external && !fs.existsSync(path.join(ROOT, pageFile(p)))) throw new Error(`Page not found: ${pageFile(p)}`);
 }
 
 function between(src, startMarker, endMarker, inner) {
@@ -70,7 +72,7 @@ const itemList = {
   '@type': 'ItemList',
   name: 'Case Studies by Sathish Sachithanandam',
   itemListElement: internal.map((p, i) => ({
-    '@type': 'ListItem', position: i + 1, name: p.title || p.name, url: `${SITE}/${p.href}`, description: p.ld || p.summary,
+    '@type': 'ListItem', position: i + 1, name: p.title || p.name, url: `${SITE}${p.href}`, description: p.ld || p.summary,
   })),
 };
 index = between(index, '<!-- LD-PROJECTS:START -->', '<!-- LD-PROJECTS:END -->',
@@ -110,16 +112,16 @@ const chips = ['<button class="pf-chip" type="button" data-filter="all" aria-pre
 
 const title = 'Portfolio: UX/UI Case Studies & Brand Work | Sathish S';
 const desc = `All work by Sathish Sachithanandam, UX/UI designer in Chennai: ${internal.length} on-site case studies plus UI, branding and graphic design projects, newest first.`;
-const url = `${SITE}/portfolio.html`;
+const url = `${SITE}/projects`;
 const og = `${SITE}/assets/case-studies/${internal[0] ? internal[0].slug : 'habitly'}/og.jpg`;
 const ld = [
   { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url, inLanguage: 'en',
     author: { '@type': 'Person', name: 'Sathish Sachithanandam', url: SITE },
     isPartOf: { '@type': 'WebSite', name: 'Sathish Sachithanandam Portfolio', url: SITE },
-    mainEntity: { '@type': 'ItemList', itemListElement: projects.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.title || p.name, url: p.external ? p.href : `${SITE}/${p.href}` })) } },
+    mainEntity: { '@type': 'ItemList', itemListElement: projects.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.title || p.name, url: p.external ? p.href : `${SITE}${p.href}` })) } },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE + '/' },
-    { '@type': 'ListItem', position: 2, name: 'Portfolio', item: url } ] },
+    { '@type': 'ListItem', position: 2, name: 'Projects', item: url } ] },
 ];
 const nextInternal = internal[0];
 
@@ -146,14 +148,14 @@ const portfolio = `<!DOCTYPE html>
   <meta name="twitter:image" content="${og}" />
   <meta name="twitter:site" content="@im_super18" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/images/favicon-avatar.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon-avatar.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/favicon-avatar.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-avatar.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Oswald:wght@400;700&family=Space+Grotesk:wght@500;700&family=Epilogue:wght@900&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=115" />
-  <link rel="stylesheet" href="case-study.css?v=5" />
-  <link rel="stylesheet" href="portfolio.css?v=1" />
+  <link rel="stylesheet" href="/style.css?v=115" />
+  <link rel="stylesheet" href="/case-study.css?v=5" />
+  <link rel="stylesheet" href="/portfolio.css?v=1" />
   <script type="application/ld+json">${JSON.stringify(ld)}</script>
   <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -167,16 +169,16 @@ const portfolio = `<!DOCTYPE html>
   <a class="skip-to-main" href="#main">Skip to main content</a>
   <nav class="navbar">
       <div class="navbar-inner">
-        <a class="logo" href="index.html" aria-label="Sathish S, Home">SS</a>
+        <a class="logo" href="/" aria-label="Sathish S, Home">SS</a>
         <button class="hamburger" aria-label="Menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
         <ul class="nav-links">
-          <li><a href="index.html#home">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="portfolio.html" aria-current="page">Projects</a></li>
-          <li><a href="index.html#blog">Blog</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/projects" aria-current="page">Projects</a></li>
+          <li><a href="/#blog">Blog</a></li>
+          <li><a href="/#contact">Contact</a></li>
         </ul>
       </div>
     </nav>
@@ -185,7 +187,7 @@ const portfolio = `<!DOCTYPE html>
       <div class="cs-wrap">
         <div class="cs-hero-grid">
           <div class="cs-hero-copy">
-            <a class="cs-back" href="index.html"><span aria-hidden="true">&larr;</span> Home</a>
+            <a class="cs-back" href="/"><span aria-hidden="true">&larr;</span> Home</a>
             <p class="cs-eyebrow">PORTFOLIO | ALL WORK</p>
             <h1 class="cs-title">Every project, newest first.</h1>
             <p class="cs-lede">Case studies, UX audits and brand work. The latest sits at the top and older projects follow below.</p>
@@ -218,8 +220,8 @@ ${projects.map(pfCard).join('\n')}        </div>
         <p class="cs-kicker cs-rv">WANT TO SEE MORE?</p>
         <a class="big cs-rv" href="https://www.behance.net/sathishsachida" target="_blank" rel="noopener noreferrer">More work on Behance <span aria-hidden="true">&rarr;</span></a>
         <div class="links cs-rv">
-          <a class="cs-btn" href="${nextInternal ? attr(nextInternal.href) : 'index.html'}">Read the latest case study</a>
-          <a class="cs-btn ghost" href="index.html#contact">Get in touch</a>
+          <a class="cs-btn" href="${nextInternal ? attr(nextInternal.href) : '/'}">Read the latest case study</a>
+          <a class="cs-btn ghost" href="/#contact">Get in touch</a>
         </div>
       </div>
     </section>
@@ -228,27 +230,25 @@ ${projects.map(pfCard).join('\n')}        </div>
     <span>Copyright &copy; 2026 Sathish S. All Rights Reserved.</span>
     <span>Made with care &middot; Chennai, India</span>
   </footer>
-  <script src="case-study.js?v=2"></script>
-  <script src="portfolio.js"></script>
+  <script src="/case-study.js?v=2"></script>
+  <script src="/portfolio.js"></script>
 </body>
 </html>
 `;
-write('portfolio.html', portfolio);
+write('projects.html', portfolio);
 
 /* ───────────── 3. Sitemap ───────────── */
 const today = new Date().toISOString().slice(0, 10);
 const urlEntry = (loc, pr) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${pr}</priority>\n  </url>\n`;
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  urlEntry(`${SITE}/`, '1.0') + urlEntry(`${SITE}/portfolio.html`, '0.9') + internal.map((p) => urlEntry(`${SITE}/${p.href}`, '0.8')).join('') + '</urlset>\n');
+  urlEntry(`${SITE}/`, '1.0') + urlEntry(`${SITE}/projects`, '0.9') + internal.map((p) => urlEntry(`${SITE}${p.href}`, '0.8')).join('') + '</urlset>\n');
 
-/* ───────────── 4. Case study pages: next link + back link ───────────── */
+/* ───────────── 4. Case study pages: "Next case study" link ───────────── */
 internal.forEach((p, i) => {
   const next = internal[(i + 1) % internal.length];
-  const file = p.href;
+  const file = pageFile(p);
   let html = read(file);
-  html = html.replace(/(<a class="big cs-rv" href=")[^"]*(">)[^<]*(<span)/, `$1${path.basename(next.href)}$2${esc(next.title || next.name)} $3`);
-  html = html.replace(/href="\.\.\/index\.html#projects"/g, 'href="../portfolio.html"');
-  html = html.replace(/"item": ?"https:\/\/www\.uxbysathish\.com\/#projects"/g, `"item":"${SITE}/portfolio.html"`);
+  html = html.replace(/(<a class="big cs-rv" href=")[^"]*(">)[^<]*(<span)/, `$1${next.href}$2${esc(next.title || next.name)} $3`);
   write(file, html);
 });
 
